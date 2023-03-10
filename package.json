@@ -1,0 +1,59 @@
+{
+  "name": "rapid-logger",
+  "version": "0.0.1",
+  "description": "A customizable, speedy logger for Node projects with deferred evaluation",
+  "main": "index.js",
+  "keywords": [
+    "logger",
+    "logging",
+    "log",
+    "performant",
+    "fast",
+    "deferred"
+  ],
+  "homepage": "https://github.com/nolawnchairs/rapid-logger",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nolawnchairs/rapid-logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nolawnchairs/rapid-logger/issues"
+  },
+  "author": "Michael Wieczorek",
+  "license": "MIT",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "test",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "../src/**/*.ts"
+    ],
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.14.6",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "dts-bundle-generator": "^7.2.0",
+    "eslint": "^8.35.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "define": "dts-bundle-generator --config ./dts.config.json",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  }
+}
