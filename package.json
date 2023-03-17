@@ -53,6 +53,7 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
+    "dev": "tsc -w",
     "build": "rimraf lib && tsc && npm run define",
     "define": "dts-bundle-generator --config ./dts.config.json",
     "lint": "eslint . --ext .ts",
