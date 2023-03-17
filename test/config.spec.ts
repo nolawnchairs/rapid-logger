@@ -1,8 +1,30 @@
 import { LogEntry } from '..'
-import { configureLogger, getProfile } from '../src/config'
+import { initLogger, getProfile } from '../src/config'
 import { toolkit } from '../src/toolkit'
 
 describe('Config', () => {
+
+  initLogger({
+    console: {
+      appName: 'test',
+      levels: 'DIWE',
+    },
+    customProfiles: {
+      alice: {
+        appName: 'alice',
+        levels: 'E',
+        formatter: () => 'Stuff',
+        handler: () => void 0,
+      },
+      bob: {
+        enabled: false,
+        appName: 'bob',
+        levels: 'I',
+        formatter: () => 'Stuff',
+        handler: () => void 0,
+      },
+    },
+  })
 
   let entry: LogEntry
 
@@ -16,27 +38,6 @@ describe('Config', () => {
       stack: undefined,
       level: 'debug',
     }
-    configureLogger({
-      console: {
-        appName: 'test',
-        levels: 'DIWE',
-      },
-      customProfiles: {
-        alice: {
-          appName: 'alice',
-          levels: 'E',
-          formatter: () => 'Stuff',
-          handler: () => void 0,
-        },
-        bob: {
-          enabled: false,
-          appName: 'bob',
-          levels: 'I',
-          formatter: () => 'Stuff',
-          handler: () => void 0,
-        },
-      },
-    })
   })
 
   it('should configure the default console profile', () => {
