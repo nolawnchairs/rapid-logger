@@ -66,6 +66,30 @@ export enum AnsiColors {
   BG_BRIGHT_BLACK = '\u001b[40;1m',
 }
 
+const LEVEL_COLORS: Record<LogLevel, AnsiColors> = {
+  verbose: AnsiColors.CYAN,
+  debug: AnsiColors.MAGENTA,
+  info: AnsiColors.GREEN,
+  warn: AnsiColors.YELLOW,
+  error: AnsiColors.RED,
+}
+
+const LEVEL_ABBREVIATIONS: Record<LogLevel, string> = {
+  verbose: 'VERB',
+  debug: 'DEBUG',
+  info: 'INFO',
+  warn: 'WARN',
+  error: 'ERROR',
+}
+
+const LEVEL_TEXT_COLORS: Record<LogLevel, AnsiColors> = {
+  verbose: AnsiColors.WHITE,
+  debug: AnsiColors.WHITE,
+  info: AnsiColors.WHITE,
+  warn: AnsiColors.YELLOW,
+  error: AnsiColors.RED,
+}
+
 /**
  * The default formatter we use when none is specified.
  *
@@ -74,30 +98,6 @@ export enum AnsiColors {
  * @implements {Formatter}
  */
 export class DefaultFormatter implements Formatter {
-
-  static readonly LEVEL_COLORS: Record<LogLevel, AnsiColors> = {
-    verbose: AnsiColors.CYAN,
-    debug: AnsiColors.MAGENTA,
-    info: AnsiColors.GREEN,
-    warn: AnsiColors.YELLOW,
-    error: AnsiColors.RED,
-  }
-
-  static readonly LEVEL_ABBREVIATIONS: Record<LogLevel, string> = {
-    verbose: 'VERB',
-    debug: 'DEBUG',
-    info: 'INFO',
-    warn: 'WARN',
-    error: 'ERROR',
-  }
-
-  static readonly LEVEL_TEXT_COLORS: Record<LogLevel, AnsiColors> = {
-    verbose: AnsiColors.WHITE,
-    debug: AnsiColors.WHITE,
-    info: AnsiColors.WHITE,
-    warn: AnsiColors.YELLOW,
-    error: AnsiColors.RED,
-  }
 
   /**
    *
@@ -111,7 +111,7 @@ export class DefaultFormatter implements Formatter {
     const { level, message, timestamp, pid, context, appName, stack } = entry
     return toolkit.compose(
       toolkit.if(appName, v => toolkit.compose(
-        toolkit.colorize(DefaultFormatter.LEVEL_TEXT_COLORS[level], `${v} |`),
+        toolkit.colorize(LEVEL_TEXT_COLORS[level], `${v} |`),
         toolkit.space,
       )),
       toolkit.brightBlue(timestamp.toISOString()),
@@ -119,14 +119,40 @@ export class DefaultFormatter implements Formatter {
       toolkit.gray(pid.toString(10)),
       toolkit.times(toolkit.space, 2),
       toolkit.colorize(
-        DefaultFormatter.LEVEL_COLORS[level],
-        toolkit.padStart(DefaultFormatter.LEVEL_ABBREVIATIONS[level], 5)
+        LEVEL_COLORS[level],
+        toolkit.padStart(LEVEL_ABBREVIATIONS[level], 5)
       ),
       toolkit.space,
       toolkit.gray(`[${context}]`),
       toolkit.space,
       toolkit.colorize(
-        DefaultFormatter.LEVEL_TEXT_COLORS[level],
+        LEVEL_TEXT_COLORS[level],
+        message
+      ),
+      toolkit.if(stack, () => toolkit.compose(
+        toolkit.lf,
+        toolkit.colorize(AnsiColors.BRIGHT_RED, '✖'),
+        toolkit.space,
+        stack!,
+      )),
+    )
+  }
+}
+
+export class BootstrapFormatter implements Formatter {
+
+  format(entry: LogEntry, toolkit: Toolkit): string {
+    const { level, message, timestamp, pid, context, appName, stack } = entry
+    return toolkit.compose(
+      `[${appName}]`,
+      toolkit.space,
+      toolkit.colorize(
+        LEVEL_COLORS[level],
+        level.toUpperCase()
+      ),
+      ' - ',
+      toolkit.colorize(
+        LEVEL_TEXT_COLORS[level],
         message
       ),
       toolkit.if(stack, () => toolkit.compose(
