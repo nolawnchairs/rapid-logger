@@ -4,7 +4,6 @@ import { ConsoleHandler, Handler, HandlerFn } from './handler'
 import { parseLevels } from './log-level'
 import { Profile, resolveProfile } from './profile'
 
-// Required configuration values
 type RequiredConfig = {
   /**
    * The levels to log. This is a string of characters that map to the
@@ -25,7 +24,6 @@ type RequiredConfig = {
   levels: string
 }
 
-// Optional configuration values
 type OptionalConfig = {
   /**
    * Whether or not this logging profile is enabled. Defaults to `true`.
@@ -127,9 +125,10 @@ export function getProfile(id: string = 'console'): Profile {
  * * appName: `undefined`
  * * eol: `lf`
  *
+ * @throws {Error} If the logger was already initialized
  * @export
  */
-export function configureLogger(): void
+export function initLogger(): void
 /**
  * Configures and bootstraps the logger. Accepts a log level schematic string using
  * the following characters:
@@ -146,29 +145,21 @@ export function configureLogger(): void
  * @export
  * @param {string} config
  * @throws {Error} If the log level schematic contains invalid characters
+ * @throws {Error} If the logger was already initialized
  */
-export function configureLogger(config: string): void
-export function configureLogger(config: LoggerConfig): void
-
+export function initLogger(config: string): void
 /**
- * Configures and bootstraps the logger. Accepts a `LoggerConfig` object
- *
- * If a string is provided, it will be used as the log level schematic
- *
- * If no configuration is provided, the default console profile will be used
- * with the default configuration:
- * * levels: `VDIWE` (all levels) if `NODE_ENV` is `development`, otherwise `E`
- *   (errors only)
- * * enabled: `true`
- * * formatter: `DefaultFormatter`
- * * handler: `ConsoleHandler`
- * * appName: `undefined`
- * * eol: `lf`
+ * Configures and bootstraps the logger.
  *
  * @export
- * @param {LoggerConfig} [config]
+ * @param {LoggerConfig} config
+ * @throws {Error} If the logger was already initialized
  */
-export function configureLogger(config?: LoggerConfig | string): void {
+export function initLogger(config: LoggerConfig): void
+export function initLogger(config?: LoggerConfig | string): void {
+  if (registry.size > 0) {
+    throw new Error('Logger already initialized')
+  }
   if (!config) {
     registry.set(
       'console',
@@ -205,4 +196,3 @@ export function configureLogger(config?: LoggerConfig | string): void {
     registry.set(name, new Profile(resolveProfile(profile)))
   }
 }
-

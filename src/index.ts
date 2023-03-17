@@ -1,5 +1,5 @@
 
-import { configureLogger, ProfileConfig } from './config'
+import { initLogger, ProfileConfig } from './config'
 import { Formatter, FormatterFn, AnsiColors } from './formatter'
 import { Handler, HandlerFn } from './handler'
 import { LogLevel } from './log-level'
@@ -8,7 +8,7 @@ import { createProfile, Profile, ResolvedProfile } from './profile'
 import { Toolkit } from './toolkit'
 
 export {
-  configureLogger,
+  initLogger as configureLogger,
   createProfile,
   ProfileConfig,
   Profile,

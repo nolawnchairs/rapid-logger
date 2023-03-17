@@ -208,7 +208,7 @@ export class Logger implements LoggerInterface {
   error(message: string, stack: string): void
   error(messageSupplier: MessageSupplier): void
   error(messageSupplier: MessageSupplier, stack: string): void
-  error(argument: string | MessageSupplier, stack?: string | MessageSupplier): void {
+  error(argument: string | MessageSupplier, stack?: string): void {
     this.dump('error', argument, stack)
   }
 
@@ -223,10 +223,10 @@ export class Logger implements LoggerInterface {
    * @return {*}  {Promise<void>}
    * @memberof Logger
    */
-  private async dump(level: LogLevel, message: string | MessageSupplier, stack?: string | MessageSupplier): Promise<void> {
+  private async dump(level: LogLevel, message: string | MessageSupplier, stack?: string): Promise<void> {
     return new Promise<void>(resolve => {
+      // will only evaluate once
       const messageLatch = new Memoized(() => typeof message === 'string' ? message : message())
-      const stackLatch = new Memoized(() => typeof stack === 'string' ? stack : stack ? stack() : undefined)
       for (const profile of this.profiles) {
         if (!profile.isLevelEnabled(level)) {
           return resolve()
@@ -237,7 +237,7 @@ export class Logger implements LoggerInterface {
           timestamp: new Date(),
           pid: process.pid,
           message: messageLatch.get(),
-          stack: stackLatch.get(),
+          stack,
           level,
         }
         const formatted = profile.format(entry)
