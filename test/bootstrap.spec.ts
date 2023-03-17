@@ -1,6 +1,6 @@
 
 import {
-  configureLogger,
+  initLogger,
   createProfile,
   Profile,
   AnsiColors,
@@ -10,7 +10,7 @@ import {
 describe('Bootstrap', () => {
 
   it('should find all exported objects', () => {
-    expect(configureLogger).toBeDefined()
+    expect(initLogger).toBeDefined()
     expect(createProfile).toBeDefined()
     expect(Profile).toBeDefined()
     expect(AnsiColors).toBeDefined()

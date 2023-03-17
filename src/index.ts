@@ -8,7 +8,7 @@ import { createProfile, Profile, ResolvedProfile } from './profile'
 import { Toolkit } from './toolkit'
 
 export {
-  initLogger as configureLogger,
+  initLogger,
   createProfile,
   ProfileConfig,
   Profile,
