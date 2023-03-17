@@ -1,8 +1,9 @@
 
-import { DefaultFormatter, Formatter, FormatterFn } from './formatter'
+import { BootstrapFormatter, DefaultFormatter, Formatter, FormatterFn } from './formatter'
 import { ConsoleHandler, Handler, HandlerFn } from './handler'
 import { parseLevels } from './log-level'
-import { Profile, resolveProfile } from './profile'
+import { Logger } from './logger'
+import { createProfile, Profile, resolveProfile } from './profile'
 
 type RequiredConfig = {
   /**
@@ -90,6 +91,13 @@ type LoggerConfig = {
   customProfiles?: Record<string, ProfileConfig>
 }
 
+// Create bootstrap logger to log errors during initialization
+const bootLogger = new Logger('Bootstrap', createProfile({
+  levels: 'EWI',
+  appName: 'Rapid Logger',
+  formatter: new BootstrapFormatter(),
+}))
+
 // Registry of profile names to their corresponding profile wrapper
 const registry = new Map<string, Profile>()
 
@@ -125,7 +133,6 @@ export function getProfile(id: string = 'console'): Profile {
  * * appName: `undefined`
  * * eol: `lf`
  *
- * @throws {Error} If the logger was already initialized
  * @export
  */
 export function initLogger(): void
@@ -145,7 +152,6 @@ export function initLogger(): void
  * @export
  * @param {string} config
  * @throws {Error} If the log level schematic contains invalid characters
- * @throws {Error} If the logger was already initialized
  */
 export function initLogger(config: string): void
 /**
@@ -153,13 +159,13 @@ export function initLogger(config: string): void
  *
  * @export
  * @param {LoggerConfig} config
- * @throws {Error} If the logger was already initialized
  */
 export function initLogger(config: LoggerConfig): void
 export function initLogger(config?: LoggerConfig | string): void {
   if (registry.size > 0) {
-    throw new Error('Logger already initialized')
+    bootLogger.warn('Logger already initialized at least once. Initializing again with current settings... surely this wasn\'t intentional.')
   }
+  registry.clear()
   if (!config) {
     registry.set(
       'console',
