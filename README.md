@@ -1,6 +1,8 @@
 
 # Rapid Logger
 
+> **Note** - this is a new library and versioned at 0.0.1 at the moment. It works, but not all tests have been written. Once all tests are written, it will be versioned at 1.0.0.
+
 Rapid Logger is a logging library for Node.js that aims to provide fast and efficient logging by only evaluating log messages when the corresponding log level is enabled.
 
 ## Installation
