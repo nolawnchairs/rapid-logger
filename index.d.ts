@@ -136,7 +136,6 @@ export declare function createProfile(config: ProfileConfig): Profile;
  * * appName: `undefined`
  * * eol: `lf`
  *
- * @throws {Error} If the logger was already initialized
  * @export
  */
 export declare function initLogger(): void;
@@ -145,7 +144,6 @@ export declare function initLogger(): void;
  *
  * @export
  * @param {LoggerConfig} config
- * @throws {Error} If the logger was already initialized
  */
 export declare function initLogger(config: LoggerConfig): void;
 /**
@@ -164,7 +162,6 @@ export declare function initLogger(config: LoggerConfig): void;
  * @export
  * @param {string} config
  * @throws {Error} If the log level schematic contains invalid characters
- * @throws {Error} If the logger was already initialized
  */
 export declare function initLogger(config: string): void;
 export interface Formatter {
