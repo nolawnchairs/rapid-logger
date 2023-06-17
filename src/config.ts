@@ -1,9 +1,9 @@
 
-import { BootstrapFormatter, DefaultFormatter, Formatter, FormatterFn } from './formatter'
-import { ConsoleHandler, Handler, HandlerFn } from './handler'
-import { parseLevels } from './log-level'
-import { Logger } from './logger'
-import { createProfile, Profile, resolveProfile } from './profile'
+import { BootstrapFormatter, DefaultFormatter, Formatter, FormatterFn } from './formatter.js'
+import { ConsoleHandler, Handler, HandlerFn } from './handler.js'
+import { parseLevels } from './log-level.js'
+import { Logger } from './logger.js'
+import { createProfile, Profile, resolveProfile } from './profile.js'
 
 type RequiredConfig = {
   /**

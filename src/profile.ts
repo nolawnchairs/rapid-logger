@@ -1,10 +1,10 @@
 
-import { ProfileConfig } from './config'
-import { DefaultFormatter, Formatter, FormatterFn } from './formatter'
-import { ConsoleHandler, Handler, HandlerFn } from './handler'
-import { LogLevel, parseLevels } from './log-level'
-import { LogEntry } from './logger'
-import { toolkit } from './toolkit'
+import { ProfileConfig } from './config.js'
+import { DefaultFormatter, Formatter, FormatterFn } from './formatter.js'
+import { ConsoleHandler, Handler, HandlerFn } from './handler.js'
+import { LogLevel, parseLevels } from './log-level.js'
+import { LogEntry } from './logger.js'
+import { toolkit } from './toolkit.js'
 
 /**
  * Profile configuration derived from the user's configuration.
