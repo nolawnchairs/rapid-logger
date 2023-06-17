@@ -4,6 +4,5 @@ src
 test
 dts.config.json
 fixup.js
-README.md
 ts*.json
 *.js.map
