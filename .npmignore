@@ -3,3 +3,4 @@ test
 *.js.map
 .gitignore
 ts*.json
+dts.config.json
