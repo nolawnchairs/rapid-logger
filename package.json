@@ -1,6 +1,6 @@
 {
   "name": "rapid-logger",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A customizable, speedy, and fully-typed logger for Node projects with deferred evaluation",
   "keywords": [
     "logger",
@@ -26,8 +26,8 @@
   "module": "lib/esm/index.js",
   "exports": {
     ".": {
-        "import": "./lib/esm/index.js",
-        "require": "./lib/cjs/index.js"
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js"
     }
   },
   "jest": {
