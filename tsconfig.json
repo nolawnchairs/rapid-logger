@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es2018",
+    "target": "es2015",
     "lib": [
       "es2015",
       "esnext"
@@ -16,7 +15,6 @@
     "noUnusedLocals": false,
     "strictPropertyInitialization": false,
     "removeComments": true,
-    "outDir": "./lib"
   },
   "include": [
     "./src/**/*"
