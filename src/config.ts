@@ -5,6 +5,9 @@ import { parseLevels } from './log-level.js'
 import { Logger } from './logger.js'
 import { createProfile, Profile, resolveProfile } from './profile.js'
 
+// Registry of profile names to their corresponding profile wrapper
+const registry = new Map<string, Profile>()
+
 type RequiredConfig = {
   /**
    * The levels to log. This is a string of characters that map to the
@@ -97,9 +100,6 @@ const bootLogger = new Logger('Bootstrap', createProfile({
   appName: 'Rapid Logger',
   formatter: new BootstrapFormatter(),
 }))
-
-// Registry of profile names to their corresponding profile wrapper
-const registry = new Map<string, Profile>()
 
 /**
  * Returns the profile wrapper for the specified profile name.
@@ -194,11 +194,10 @@ export function initLogger(config?: LoggerConfig | string): void {
     return
   }
 
-  const { console, customProfiles = {} } = config
-  const resolved = resolveProfile(console)
+  const resolved = resolveProfile(config.console)
   registry.set('console', new Profile(resolved))
 
-  for (const [name, profile] of Object.entries(customProfiles)) {
+  for (const [name, profile] of Object.entries(config.customProfiles ?? {})) {
     registry.set(name, new Profile(resolveProfile(profile)))
   }
 }
