@@ -1,6 +1,6 @@
 {
   "name": "rapid-logger",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A customizable, speedy, and fully-typed logger for Node projects with deferred evaluation",
   "keywords": [
     "logger",
