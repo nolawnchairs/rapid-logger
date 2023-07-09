@@ -1,4 +1,4 @@
-import { AnsiColors } from './formatter.js'
+import { AnsiColors } from './formatter'
 
 /**
  * Toolkit with helper functions for formatting

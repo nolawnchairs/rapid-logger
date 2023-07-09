@@ -9,7 +9,8 @@
       "output": {
         "inlineDeclareGlobals": false,
         "sortNodes": true,
-        "umdModuleName": "RapidLogger"
+        "umdModuleName": "RapidLogger",
+        "noBanner": true
       }
     }
   ]

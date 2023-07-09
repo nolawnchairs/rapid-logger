@@ -1,8 +1,8 @@
 
-import { getProfiles } from './config.js'
-import { LogLevel } from './log-level.js'
-import { Profile } from './profile.js'
-import { Memoized } from './util.js'
+import { getProfiles } from './config'
+import { LogLevel } from './log-level'
+import { Profile } from './profile'
+import { Memoized } from './util'
 
 /**
  * Represents a function that returns a string.

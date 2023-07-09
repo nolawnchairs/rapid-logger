@@ -22,14 +22,7 @@
   "author": "Michael Wieczorek",
   "license": "MIT",
   "types": "index.d.ts",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "exports": {
-    ".": {
-      "import": "./lib/esm/index.js",
-      "require": "./lib/cjs/index.js"
-    }
-  },
+  "main": "lib/index.js",
   "jest": {
     "moduleFileExtensions": [
       "js",
@@ -62,7 +55,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build": "rimraf lib && npm run compile && npm run define",
-    "compile": "tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node fixup.js",
+    "compile": "tsc -p tsconfig.json",
     "define": "dts-bundle-generator --config ./dts.config.json",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",

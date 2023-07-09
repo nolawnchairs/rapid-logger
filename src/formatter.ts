@@ -1,7 +1,7 @@
 
-import { LogLevel } from './log-level.js'
-import { LogEntry } from './logger.js'
-import { Toolkit } from './toolkit.js'
+import { LogLevel } from './log-level'
+import { LogEntry } from './logger'
+import { Toolkit } from './toolkit'
 
 /**
  * A function that formats a log entry.

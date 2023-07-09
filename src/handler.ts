@@ -1,5 +1,5 @@
 
-import { LogEntry } from './logger.js'
+import { LogEntry } from './logger'
 
 /**
   * The function to define a custom handler

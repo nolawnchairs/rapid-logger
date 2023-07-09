@@ -6,6 +6,8 @@
       "es2015",
       "esnext"
     ],
+    "module": "commonjs",
+    "outDir": "lib",
     "sourceMap": true,
     "emitDecoratorMetadata": false,
     "experimentalDecorators": true,

@@ -1,9 +1,9 @@
 
-import { BootstrapFormatter, DefaultFormatter, Formatter, FormatterFn } from './formatter.js'
-import { ConsoleHandler, Handler, HandlerFn } from './handler.js'
-import { parseLevels } from './log-level.js'
-import { Logger } from './logger.js'
-import { createProfile, Profile, resolveProfile } from './profile.js'
+import { BootstrapFormatter, DefaultFormatter, Formatter, FormatterFn } from './formatter'
+import { ConsoleHandler, Handler, HandlerFn } from './handler'
+import { parseLevels } from './log-level'
+import { Logger } from './logger'
+import { createProfile, Profile, resolveProfile } from './profile'
 
 // Registry of profile names to their corresponding profile wrapper
 const registry = new Map<string, Profile>()
